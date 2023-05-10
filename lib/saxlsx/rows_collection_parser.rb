@@ -97,7 +97,7 @@ module Saxlsx
       when 's'
         @shared_strings[text.to_i]
       when 'inlineStr'
-        CGI.unescapeHTML(text)
+        text
       when 'b'
         BooleanParser.parse text
       else
@@ -124,12 +124,12 @@ module Saxlsx
             # Auto convert numbers
             $1 ? Float(text) : Integer(text, 10)
           else
-            CGI.unescapeHTML(text)
+            text
           end
         end
       end
     rescue ArgumentError
-      CGI.unescapeHTML(text)
+      text
     end
 
     def detect_format_type(index)
