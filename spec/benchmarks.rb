@@ -129,11 +129,8 @@ module Saxlsx
     end
 
     def run_roo(path)
-      w = Roo::Excelx.new path
-      w.each_with_pagename do |_, s|
-        s.each do |r|
-          r.to_a.inspect
-        end
+      Roo::Excelx.new(path).each_row_streaming do |row|
+        row.each { |cell| cell.value }
       end
     end
 
